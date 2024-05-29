@@ -48,7 +48,7 @@ const [nameFile, setnameFile] = useState({
             className='px-3 lg:px-10 py-2 gap-1 flex justify-center items-center border border-solid border-[black] rounded-lg'
             onClick={handleButtonClick}
             >
-                <CiCirclePlus className='text-black font-bold' />
+                <CiCirclePlus className='text-black font-bold h-5 w-5' />
                 <span className='hidden lg:block text-sm font-semibold'>Upload file</span>
             </button>
             <input 
