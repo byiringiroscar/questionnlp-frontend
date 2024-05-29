@@ -39,7 +39,7 @@ const Navbar = () => {
             onClick={handleButtonClick}
             >
                 <CiCirclePlus className='text-black font-bold' />
-                <span className='text-sm font-semibold'>Upload file</span>
+                <span className='hidden lg:block text-sm font-semibold'>Upload file</span>
             </button>
             <input 
             type="file" 
