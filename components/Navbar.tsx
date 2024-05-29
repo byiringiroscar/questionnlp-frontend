@@ -4,6 +4,7 @@ import logo from '../public/logo.png'
 import Image from 'next/image'
 import Link from 'next/link'
 import { CiCirclePlus } from "react-icons/ci";
+import { CiFileOn } from "react-icons/ci";
 
 const Navbar = () => {
  const fileInputRef = useRef<HTMLInputElement>(null);
@@ -26,19 +27,22 @@ const Navbar = () => {
             <Image src={logo} alt='logo' width={80} height={80} />
         </Link>
 
-        <button 
-        className='px-5 py-2 gap-1 flex justify-center items-center border border-solid border-[black] rounded-lg'
-        onClick={handleButtonClick}
-        >
-            <CiCirclePlus className='text-black font-bold' />
-            <span className='text-sm font-semibold'>Upload file</span>
-        </button>
-        <input 
-          type="file" 
-          ref={fileInputRef} 
-          className="hidden" 
-          onChange={handleFileChange} 
-        />
+        <div className='flex gap-2 items-center'>
+            <p>oscar-resume.pdf</p>
+            <button 
+            className='px-5 py-2 gap-1 flex justify-center items-center border border-solid border-[black] rounded-lg'
+            onClick={handleButtonClick}
+            >
+                <CiCirclePlus className='text-black font-bold' />
+                <span className='text-sm font-semibold'>Upload file</span>
+            </button>
+            <input 
+            type="file" 
+            ref={fileInputRef} 
+            className="hidden" 
+            onChange={handleFileChange} 
+            />
+        </div>
     </nav>
   )
 }
