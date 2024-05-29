@@ -13,4 +13,26 @@
   .main-container {
     @apply mx-auto max-w-4xl
   }
+  /* Custom scrollbar */
+  #chatlist::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 5px;
+  }
+
+  /* Track */
+  #chatlist::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  #chatlist::-webkit-scrollbar-thumb {
+    background: #0FA559;
+    border-radius: 5px;
+  }
+
+  /* Handle on hover */
+  #chatlist::-webkit-scrollbar-thumb:hover {
+    background: #0FA559;
+  }
+
 }
