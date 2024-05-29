@@ -28,7 +28,12 @@ const Navbar = () => {
         </Link>
 
         <div className='flex gap-2 items-center'>
-            <p>oscar-resume.pdf</p>
+            <div className='flex gap-1 items-center'>
+                <div className='flex items-center justify-center px-[4px] py-[5px] border border-solid border-[#0FA958] rounded-lg '>
+                <CiFileOn className='text-sm font-medium leading-[16.47px] text-left text-[#0FA958]' />
+                </div>
+                <span className='text-sm font-medium leading-[16.47px] text-left text-[#0FA958]'>oscar-resume.pdf</span>
+            </div>
             <button 
             className='px-5 py-2 gap-1 flex justify-center items-center border border-solid border-[black] rounded-lg'
             onClick={handleButtonClick}
