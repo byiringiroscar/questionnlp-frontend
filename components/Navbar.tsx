@@ -1,5 +1,5 @@
 'use client';
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import logo from '../public/logo.png'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -7,6 +7,10 @@ import { CiCirclePlus } from "react-icons/ci";
 import { CiFileOn } from "react-icons/ci";
 
 const Navbar = () => {
+const [nameFile, setnameFile] = useState({
+    is_name: false,
+    file_name: ''
+  });
  const fileInputRef = useRef<HTMLInputElement>(null);
 
  const handleButtonClick = () => {
