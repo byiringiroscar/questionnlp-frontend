@@ -36,7 +36,7 @@ const Navbar = () => {
             </div>
 
             <button 
-            className='px-10 py-2 gap-1 flex justify-center items-center border border-solid border-[black] rounded-lg'
+            className='px-3 lg:px-10 py-2 gap-1 flex justify-center items-center border border-solid border-[black] rounded-lg'
             onClick={handleButtonClick}
             >
                 <CiCirclePlus className='text-black font-bold' />
