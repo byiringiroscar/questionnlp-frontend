@@ -34,6 +34,7 @@ const Navbar = () => {
                 </div>
                 <span className='text-sm font-medium leading-[16.47px] text-left text-[#0FA958]'>oscar-resume.pdf</span>
             </div>
+
             <button 
             className='px-10 py-2 gap-1 flex justify-center items-center border border-solid border-[black] rounded-lg'
             onClick={handleButtonClick}
@@ -41,12 +42,7 @@ const Navbar = () => {
                 <CiCirclePlus className='text-black font-bold' />
                 <span className='hidden lg:block text-sm font-semibold'>Upload file</span>
             </button>
-            <input 
-            type="file" 
-            ref={fileInputRef} 
-            className="hidden" 
-            onChange={handleFileChange} 
-            />
+            <input type="file"  ref={fileInputRef} className="hidden" onChange={handleFileChange} />
         </div>
     </nav>
   )
