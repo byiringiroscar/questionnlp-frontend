@@ -11,13 +11,10 @@ const Navbar = () => {
             <Image src={logo} alt='logo' width={80} height={80} />
         </Link>
 
-        <div className="relative w-8 h-8 text-center overflow-hidden rounded-full right-0 bottom-0 bg-[#7269EF]">
-            <input  type="file" name="image" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
-            <CiCirclePlus className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0 bg-white" />
-        </div>
-
-
-
+        <button className='px-5 py-2 gap-1 flex justify-center items-center border border-solid border-[black] rounded-lg'>
+            <CiCirclePlus className='text-black font-bold' />
+            <span className='text-sm font-semibold'>Upload file</span>
+        </button>
     </nav>
   )
 }
