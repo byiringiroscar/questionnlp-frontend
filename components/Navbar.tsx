@@ -22,7 +22,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className='flex justify-between padding-container items-center py-6 xl:px-28'>
+    <nav className='flex justify-between padding-container items-center py-6 xl:px-28 shadow-[rgba(0,0,0,0.24)_0px_3px_8px]'>
         <Link href='/'>
             <Image src={logo} alt='logo' width={80} height={80} />
         </Link>
