@@ -51,7 +51,14 @@ const [nameFile, setnameFile] = useState({
                 <CiCirclePlus className='text-black font-bold' />
                 <span className='hidden lg:block text-sm font-semibold'>Upload file</span>
             </button>
-            <input type="file"  ref={fileInputRef} className="hidden" onChange={handleFileChange} />
+            <input 
+             type="file"  
+             ref={fileInputRef} 
+             className="hidden"
+             onChange={handleFileChange}
+             multiple={false}
+             accept=".pdf"
+             />
         </div>
     </nav>
   )
