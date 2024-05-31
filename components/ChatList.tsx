@@ -18,9 +18,6 @@ const ChatList = () => {
 const { data, error, mutate, isLoading }  = useSWR('home', fetcher)
 if (isLoading) return <ThreeDots color='#B0ACE9' height={50} width={50} />
 if (error) return <div>Failed to load</div>
-
-console.log(data)
-
   return (
     <div id='chatlist' className='h-[85%] w-full flex flex-col gap-10 overflow-y-scroll'>
             {data.map((ele: any, index: number) => {
@@ -31,7 +28,7 @@ console.log(data)
                         <p className='text-[15px] font-medium text-[#1B1F2A]'>{ele.question}</p>
                     </div>
                     <div className='flex gap-5' id='bot-message'>
-                        <Image src={ailogo} alt='ailogo' width={50} height={50}  />
+                        <Image src={ailogo} alt='ailogo' width={50} height={50} className='h-[45px] w-[45px]'  />
                         <p className='text-[15px] font-medium text-[#1B1F2A]'>{ele.answer}</p>
                     </div>
                     </>
