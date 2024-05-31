@@ -45,6 +45,8 @@ const Navbar = () => {
         formData.append('file', files[0]);
         try{
           const uploadFile = await uploadPDF(formData)
+          console.log(uploadFile.status)
+
           if(uploadFile.status === 'success'){
             setLoading(false)
             toast.success('File uploaded successfully', {
