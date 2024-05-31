@@ -10,13 +10,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ThreeDots } from 'react-loader-spinner'
 
 
-const uploadPDF = async (dataBody: any) => {
+const uploadPDF = async (formData: FormData) => {
   const res = await fetch(`http://127.0.0.1:8000/question/file_upload`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(dataBody),
+    body: formData,
   })
 
   const data = await res.json();
