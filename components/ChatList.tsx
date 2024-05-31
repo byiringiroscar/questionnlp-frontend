@@ -1,6 +1,15 @@
+'use client'
+
 import React from 'react'
 import Image from 'next/image'
 import ailogo from '../public/bot.png'
+
+
+const fetcher = async() => {
+    const res = await fetch(`http://127.0.0.1:8000/question/get_all_question_answer`)
+    const data = await res.json()
+    return data
+  }
 
 const ChatList = () => {
   return (
