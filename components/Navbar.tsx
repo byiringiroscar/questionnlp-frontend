@@ -26,18 +26,14 @@ const uploadPDF = async (dataBody: any) => {
 
 
 const Navbar = () => {
-const [nameFile, setnameFile] = useState({
-    is_name: false,
-    file_name: ''
-  });
+
+  const [nameFile, setnameFile] = useState({is_name: false, file_name: ''});
   const [ loading, setLoading ] = useState(false)
+  const [newData, setnewData] = useState({pdf_file: ''});
+  
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-
-
-
- const fileInputRef = useRef<HTMLInputElement>(null);
-
- const handleButtonClick = () => {
+  const handleButtonClick = () => {
     fileInputRef.current?.click();
   };
 
