@@ -37,8 +37,6 @@ const MainContent = () => {
       setLoading(false)
       setQuestion('');
     }
-
-
   }
 
 
