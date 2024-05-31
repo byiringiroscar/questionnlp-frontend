@@ -8,6 +8,7 @@ import { CiFileOn } from "react-icons/ci";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ThreeDots } from 'react-loader-spinner'
+import { LineWave } from 'react-loader-spinner'
 
 
 const uploadPDF = async (formData: FormData) => {
@@ -107,9 +108,28 @@ const Navbar = () => {
             <button 
             className='px-3 lg:px-10 py-2 gap-1 flex justify-center items-center border border-solid border-[black] rounded-lg'
             onClick={handleButtonClick}
+            disabled={loading}
             >
-                <CiCirclePlus className='text-black font-bold h-5 w-5' />
-                <span className='hidden lg:block text-sm font-semibold'>Upload file</span>
+                  {loading ? (<LineWave
+                      visible={true}
+                      height="15"
+                      width="15"
+                      color="#4fa94d"
+                      ariaLabel="line-wave-loading"
+                      wrapperStyle={{}}
+                      wrapperClass=""
+                      firstLineColor=""
+                      middleLineColor=""
+                      lastLineColor=""
+                      />): 
+                      (
+                  <>
+                  <CiCirclePlus className='text-black font-bold h-5 w-5' />
+                  <span className='hidden lg:block text-sm font-semibold'>Upload File</span>
+                  </>
+                     )
+                    }
+                
             </button>
             <input 
              type="file"  
