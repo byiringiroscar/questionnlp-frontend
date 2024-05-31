@@ -29,21 +29,62 @@ const Navbar = () => {
 
   const [nameFile, setnameFile] = useState({is_name: false, file_name: ''});
   const [ loading, setLoading ] = useState(false)
-  const [newData, setnewData] = useState({pdf_file: ''});
-  
+
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();
   };
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    setLoading(true)
     const files = event.target.files;
     if (files) {
         setnameFile({
             is_name: true,
             file_name: files[0].name
         })
+        const formData = new FormData();
+        formData.append('file', files[0]);
+        try{
+          const uploadFile = await uploadPDF(formData)
+          if(uploadFile.status === 'success'){
+            setLoading(false)
+            toast.success('File uploaded successfully', {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+          }
+          else{
+            setLoading(false)
+            toast.error('File upload failed', {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+            }
+        }
+        catch(err){
+          setLoading(false)
+          toast.error('File upload failed', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }  
     }
   }
 
