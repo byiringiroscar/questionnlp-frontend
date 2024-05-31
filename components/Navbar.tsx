@@ -5,12 +5,36 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { CiCirclePlus } from "react-icons/ci";
 import { CiFileOn } from "react-icons/ci";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { ThreeDots } from 'react-loader-spinner'
+
+
+const uploadPDF = async (dataBody: any) => {
+  const res = await fetch(`http://127.0.0.1:8000/question/file_upload`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(dataBody),
+  })
+
+  const data = await res.json();
+  return data;
+}
+
+
 
 const Navbar = () => {
 const [nameFile, setnameFile] = useState({
     is_name: false,
     file_name: ''
   });
+  const [ loading, setLoading ] = useState(false)
+
+
+
+
  const fileInputRef = useRef<HTMLInputElement>(null);
 
  const handleButtonClick = () => {
