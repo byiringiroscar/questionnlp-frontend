@@ -22,8 +22,6 @@ const uploadPDF = async (formData: FormData) => {
   return data;
 }
 
-
-
 const Navbar = () => {
 
   const [nameFile, setnameFile] = useState({is_name: false, file_name: ''});
@@ -47,7 +45,6 @@ const Navbar = () => {
         formData.append('file', files[0]);
         try{
           const uploadFile = await uploadPDF(formData)
-          console.log(uploadFile.status)
 
           if(uploadFile.status === 'success'){
             setLoading(false)

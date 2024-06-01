@@ -53,6 +53,13 @@ const fetcher = async() => {
         </div>
       );
     }
+    if(data.detail === 'File not found please upload some pdf'){
+      return (
+        <div id='chatlist' className='h-[85%] w-full flex flex-col gap-10 overflow-y-scroll'>
+          <p>Chatlist not found please upload some pdf</p>
+        </div>
+      );
+    }
       return (
         <div id='chatlist' ref={chatListRef} className='h-[85%] w-full flex flex-col gap-10 overflow-y-scroll'>
           {data.map((ele: any, index: number) => (
