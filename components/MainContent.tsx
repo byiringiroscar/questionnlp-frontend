@@ -8,11 +8,15 @@ import { LineWave } from 'react-loader-spinner'
 const askQuestion = async (question: string) => {
   const res = await fetch(`http://127.0.0.1:8000/question/ask_question`, {
     method: 'POST',
-    body: JSON.stringify({ question }),
-  })
-  const data = await res.json()
-  return data
-}
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ question: question })
+  });
+  const data = await res.json();
+  return data;
+};
+
 
 
 const MainContent = () => {
@@ -32,6 +36,7 @@ const MainContent = () => {
       if(ask.status === 'success'){
         setLoading(false)
         setQuestion('');
+        console.log('success')
       }
     } catch (error) {
       setLoading(false)
