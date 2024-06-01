@@ -3,6 +3,8 @@ import React, {useState, useRef} from 'react'
 import { LuSendHorizonal } from "react-icons/lu";
 import ChatList from './ChatList';
 import { LineWave } from 'react-loader-spinner'
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css'
 
 interface ChatMessage {
   type: 'user' | 'bot';
@@ -60,7 +62,7 @@ const MainContent = () => {
 
   return (
     <section className='padding-container w-screen h-screen pt-12 flex flex-col overflow-hidden'>
-        <ChatList chatList={chatList} />
+        <ChatList chatList={chatList} loading={loading } />
         <div id='form' className='h-[15%] flex items-center'>
             <form
             onSubmit={handleSubmit}

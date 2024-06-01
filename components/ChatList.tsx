@@ -17,6 +17,7 @@ interface ChatMessage {
 
 interface ChatListProps {
   chatList: ChatMessage[];
+  loading: boolean;
 }
 
 
@@ -28,7 +29,7 @@ const fetcher = async() => {
   }
 
 
-  const ChatList: React.FC<ChatListProps> = ({ chatList }) => {
+  const ChatList: React.FC<ChatListProps> = ({ chatList, loading }) => {
     const { data, error, mutate, isLoading }  = useSWR('home', fetcher)
     const chatListRef = useRef<HTMLDivElement>(null);
     useEffect(() => {
@@ -81,6 +82,9 @@ const fetcher = async() => {
               )}
             </React.Fragment>
           ))}
+          {loading && (
+            <Skeleton height={50} count={1} />
+          )}
         </div>
       )
     }
