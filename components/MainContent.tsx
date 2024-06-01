@@ -16,7 +16,7 @@ const askQuestion = async (question: string) => {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ question: question })
+    body: JSON.stringify({ question: question})
   });
   const data = await res.json();
   return data;
