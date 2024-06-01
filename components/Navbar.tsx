@@ -115,8 +115,8 @@ const Navbar = () => {
             >
                   {loading ? (<LineWave
                       visible={true}
-                      height="15"
-                      width="15"
+                      height="30"
+                      width="60"
                       color="#4fa94d"
                       ariaLabel="line-wave-loading"
                       wrapperStyle={{}}
