@@ -41,11 +41,17 @@ const fetcher = async() => {
       // Render skeleton loading UI while data is being fetched
       return (
         <div id='chatlist' className='h-[85%] w-full flex flex-col gap-10 overflow-y-scroll'>
-          <Skeleton height={50} count={5} />
+          <Skeleton height={50} count={3} />
         </div>
       );
     }
-    if (error) return <div>Failed to load</div>
+    if (error) {
+      return (
+        <div id='chatlist' className='h-[85%] w-full flex flex-col gap-10 overflow-y-scroll'>
+          <p>Error fetching data</p>
+        </div>
+      );
+    }
       return (
         <div id='chatlist' ref={chatListRef} className='h-[85%] w-full flex flex-col gap-10 overflow-y-scroll'>
           {data.map((ele: any, index: number) => (
