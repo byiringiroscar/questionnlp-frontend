@@ -4,6 +4,11 @@ import { LuSendHorizonal } from "react-icons/lu";
 import ChatList from './ChatList';
 import { LineWave } from 'react-loader-spinner'
 
+interface ChatMessage {
+  type: 'user' | 'bot';
+  message: string;
+}
+
 
 const askQuestion = async (question: string) => {
   const res = await fetch(`http://127.0.0.1:8000/question/ask_question`, {
@@ -20,7 +25,7 @@ const askQuestion = async (question: string) => {
 
 const MainContent = () => {
   const [ loading, setLoading ] = useState(false)
-
+  const [chatList, setChatList] = useState<ChatMessage[]>([]);
   const [question, setQuestion] = useState('');
 
   const handleChange = (e: any) => {
@@ -30,12 +35,16 @@ const MainContent = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setLoading(true)
+
+    // Append user question to chatList
+    setChatList(prevChatList => [...prevChatList,{ type: 'user', message: question }]);
     try {
       const ask = await askQuestion(question)
       if(ask.status === 'success'){
         setLoading(false)
         setQuestion('');
-        console.log('success')
+        // Append bot answer to chatList
+        setChatList(prevChatList => [...prevChatList,{ type: 'bot', message: ask.answer }]);
       }
     } catch (error) {
       setLoading(false)
@@ -46,7 +55,7 @@ const MainContent = () => {
 
   return (
     <section className='padding-container w-screen h-screen pt-12 flex flex-col overflow-hidden'>
-        <ChatList />
+        <ChatList chatList={chatList} />
         <div id='form' className='h-[15%] flex items-center'>
             <form
             onSubmit={handleSubmit}

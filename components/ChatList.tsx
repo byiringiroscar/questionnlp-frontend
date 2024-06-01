@@ -6,6 +6,18 @@ import Image from 'next/image'
 import ailogo from '../public/bot.png'
 import { ThreeDots } from 'react-loader-spinner'
 
+// create prop for chatList
+
+interface ChatMessage {
+  type: 'user' | 'bot';
+  message: string;
+}
+
+interface ChatListProps {
+  chatList: ChatMessage[];
+}
+
+
 
 const fetcher = async() => {
     const res = await fetch(`http://127.0.0.1:8000/question/get_all_question_answer`)
@@ -14,7 +26,7 @@ const fetcher = async() => {
   }
 
 
-const ChatList = () => {
+  const ChatList: React.FC<ChatListProps> = ({ chatList }) => {
 const { data, error, mutate, isLoading }  = useSWR('home', fetcher)
 if (isLoading) return <ThreeDots color='#B0ACE9' height={50} width={50} />
 if (error) return <div>Failed to load</div>
