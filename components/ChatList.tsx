@@ -5,6 +5,8 @@ import useSWR from 'swr'
 import Image from 'next/image'
 import ailogo from '../public/bot.png'
 import { ThreeDots } from 'react-loader-spinner'
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css'
 
 // create prop for chatList
 
@@ -35,7 +37,14 @@ const fetcher = async() => {
         chatListRef.current.scrollTop = chatListRef.current.scrollHeight;
       }
     }, [chatList]);
-    if (isLoading) return <ThreeDots color='#B0ACE9' height={50} width={50} />
+    if (isLoading) {
+      // Render skeleton loading UI while data is being fetched
+      return (
+        <div id='chatlist' className='h-[85%] w-full flex flex-col gap-10 overflow-y-scroll'>
+          <Skeleton height={50} count={5} />
+        </div>
+      );
+    }
     if (error) return <div>Failed to load</div>
       return (
         <div id='chatlist' ref={chatListRef} className='h-[85%] w-full flex flex-col gap-10 overflow-y-scroll'>
