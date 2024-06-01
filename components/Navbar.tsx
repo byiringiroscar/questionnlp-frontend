@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ThreeDots } from 'react-loader-spinner'
 import { LineWave } from 'react-loader-spinner'
+import { mutate } from 'swr';
 
 
 const uploadPDF = async (formData: FormData) => {
@@ -59,6 +60,8 @@ const Navbar = () => {
               draggable: true,
               progress: undefined,
             });
+            // Trigger data re-fetch
+            mutate('home');
           }
           else{
             setLoading(false)
