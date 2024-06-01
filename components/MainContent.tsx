@@ -18,7 +18,6 @@ const askQuestion = async (question: string) => {
 };
 
 
-
 const MainContent = () => {
   const [ loading, setLoading ] = useState(false)
 
