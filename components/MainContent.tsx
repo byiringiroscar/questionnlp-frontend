@@ -1,5 +1,5 @@
 "use client"
-import React, {useState} from 'react'
+import React, {useState, useRef} from 'react'
 import { LuSendHorizonal } from "react-icons/lu";
 import ChatList from './ChatList';
 import { LineWave } from 'react-loader-spinner'
@@ -27,6 +27,7 @@ const MainContent = () => {
   const [ loading, setLoading ] = useState(false)
   const [chatList, setChatList] = useState<ChatMessage[]>([]);
   const [question, setQuestion] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (e: any) => {
     setQuestion(e.target.value);
@@ -38,6 +39,10 @@ const MainContent = () => {
 
     // Append user question to chatList
     setChatList(prevChatList => [...prevChatList,{ type: 'user', message: question }]);
+    // Clear the input field
+    if (inputRef.current) {
+      inputRef.current.value = '';
+    }
     try {
       const ask = await askQuestion(question)
       if(ask.status === 'success'){
@@ -62,7 +67,10 @@ const MainContent = () => {
              className='flex gap-5 w-full border border-solid border-[#E4E8EE] h-12 px-5 rounded-lg bg-[#F6F7F9]'>
                 <input
                 onChange={handleChange}
-                 type='text' name='question' placeholder='Send a message ...' className='w-full rounded-full' />
+                ref={inputRef}
+                 type='text' name='question' placeholder='Send a message ...' 
+                 className='w-full rounded-full focus:outline-none'
+                  />
                 <button type='submit'
                 disabled={loading}
                 >
