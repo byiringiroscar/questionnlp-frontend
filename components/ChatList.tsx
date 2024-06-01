@@ -30,23 +30,36 @@ const fetcher = async() => {
 const { data, error, mutate, isLoading }  = useSWR('home', fetcher)
 if (isLoading) return <ThreeDots color='#B0ACE9' height={50} width={50} />
 if (error) return <div>Failed to load</div>
+const combinedData = [...data, ...chatList];
   return (
     <div id='chatlist' className='h-[85%] w-full flex flex-col gap-10 overflow-y-scroll'>
-            {data.map((ele: any, index: number) => {
-                return (
-                    <>
-                    <div className='flex gap-5' id='user-message'>
-                        <div className="bg-[#B0ACE9] min-w-10 h-10 flex items-center justify-center rounded-full text-white">S</div>
-                        <p className='text-[15px] font-medium text-[#1B1F2A]'>{ele.question}</p>
-                    </div>
-                    <div className='flex gap-5' id='bot-message'>
-                        <Image src={ailogo} alt='ailogo' width={50} height={50} className='h-[45px] w-[45px]'  />
-                        <p className='text-[15px] font-medium text-[#1B1F2A]'>{ele.answer}</p>
-                    </div>
-                    </>
-                )
-                
-            })}
+      {data.map((ele: any, index: number) => (
+        <React.Fragment key={index}>
+          <div className='flex gap-5' id='user-message'>
+            <div className="bg-[#B0ACE9] min-w-10 h-10 flex items-center justify-center rounded-full text-white">S</div>
+            <p className='text-[15px] font-medium text-[#1B1F2A]'>{ele.question}</p>
+          </div>
+          <div className='flex gap-5' id='bot-message'>
+            <Image src={ailogo} alt='ailogo' width={50} height={50} className='h-[45px] w-[45px]' />
+            <p className='text-[15px] font-medium text-[#1B1F2A]'>{ele.answer}</p>
+          </div>
+        </React.Fragment>
+      ))}
+      {chatList.map((ele, index) => (
+        <React.Fragment key={`chat-${index}`}>
+          {ele.type === 'user' ? (
+            <div className='flex gap-5' id='user-message'>
+              <div className="bg-[#B0ACE9] min-w-10 h-10 flex items-center justify-center rounded-full text-white">S</div>
+              <p className='text-[15px] font-medium text-[#1B1F2A]'>{ele.message}</p>
+            </div>
+          ) : (
+            <div className='flex gap-5' id='bot-message'>
+              <Image src={ailogo} alt='ailogo' width={50} height={50} className='h-[45px] w-[45px]' />
+              <p className='text-[15px] font-medium text-[#1B1F2A]'>{ele.message}</p>
+            </div>
+          )}
+        </React.Fragment>
+      ))}
     </div>
   )
 }
