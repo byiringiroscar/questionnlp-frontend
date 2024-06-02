@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+[Question-asking](https://questionnlp-pdf.vercel.app/) with PDF project is designed to facilitate interactions with PDF documents through various endpoints. It includes an endpoint for uploading PDFs and another for asking questions based on the content of these PDFs, utilizing Langchain and Gemini Pro for sophisticated language processing. Built with FastAPI, the project also features an additional endpoint to track document statuses, with SQLite serving as the default database for data storage.
 
 ## Getting Started
 
@@ -20,17 +20,34 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+### Key Features <a name="key-features"></a>
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Upload Pdf endpoint**
+- **Ask question endpoint**
+- **Use of langchain and Gemini pro with fast API**
+- **Additional endpoint for tracking documents**
+- **SQLite database by default **
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 🚀 Live Presentation <a name="live-demo"></a>
 
-## Deploy on Vercel
+- [Live Presentation Link](https://www.loom.com/share/7b7ef4f8873a4b90b7af4aebfcf7c576?sid=f66fb727-34ff-4514-b205-ee9e7ea6ce62)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Link to Backend:
+this project has a backend of fastapi click to open the backend repository 
+<a href="https://github.com/byiringiroscar/questionlp-backend.git" target="_blank">Question frontend repository</a>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+👤 **Oscar Byiringiro**
+
+- GitHub: [@githuboscar](https://github.com/byiringiroscar)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/oscarbyiringiro/)
+
+  ## 🔭 Future Features <a name="future-features"></a>
+
+- [ ] **[Add Authentication]**
+- [ ] **[Add Infinite scroll for many message]**
+- [ ] **[Handle multiple pdf file**
+
+## 🙏 Acknowledgments <a name="acknowledgements"></a>
+
+- **I would like to thank AI planet**
