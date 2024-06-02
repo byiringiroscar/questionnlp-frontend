@@ -24,11 +24,9 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 ### Key Features <a name="key-features"></a>
 
 
-- **Upload Pdf endpoint**
-- **Ask question endpoint**
-- **Use of langchain and Gemini pro with fast API**
-- **Additional endpoint for tracking documents**
-- **SQLite database by default **
+- **Upload Pdf **
+- **Chat with file**
+- **Toastfy notifcation**
 
 ## 🚀 Live Presentation <a name="live-demo"></a>
 
