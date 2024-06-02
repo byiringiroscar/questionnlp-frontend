@@ -3,7 +3,6 @@ import React, { useState, useRef, useCallback } from 'react';
 import { LuSendHorizonal } from "react-icons/lu";
 import ChatList from './ChatList';
 import { LineWave } from 'react-loader-spinner'
-import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css'
 import { useUpload } from '@/context/UploadContext';
 
