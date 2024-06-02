@@ -1,4 +1,5 @@
 [Question-asking](https://questionnlp-pdf.vercel.app/) with PDF project is designed to facilitate interactions with PDF documents through various endpoints. It includes an endpoint for uploading PDFs and another for asking questions based on the content of these PDFs, utilizing Langchain and Gemini Pro for sophisticated language processing. Built with FastAPI, the project also features an additional endpoint to track document statuses, with SQLite serving as the default database for data storage.
+![image](https://github.com/byiringiroscar/questionnlp-frontend/assets/51321655/de20b2b4-91ec-4ffc-a4a2-74deee094d12)
 
 ## Getting Started
 
