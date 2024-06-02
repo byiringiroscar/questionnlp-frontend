@@ -18,6 +18,8 @@ interface ChatMessage {
 interface ChatListProps {
   chatList: ChatMessage[];
   loading: boolean;
+  clearChatList: () => void;
+  uploading: boolean;
 }
 
 
@@ -29,8 +31,7 @@ const fetcher = async() => {
   }
 
 
-  const ChatList: React.FC<ChatListProps> = ({ chatList, loading }) => {
-    const [newChatList, setNewChatList] = useState<ChatMessage[]>([]);
+  const ChatList: React.FC<ChatListProps> = ({ chatList, loading, clearChatList, uploading }) => {
     const { data, error, mutate, isLoading }  = useSWR('home', fetcher)
     const chatListRef = useRef<HTMLDivElement>(null);
     useEffect(() => {
@@ -40,9 +41,10 @@ const fetcher = async() => {
       }
     }, [chatList]);
     useEffect(() => {
-      // Append new chat messages to newChatList
-      setNewChatList(prevChatList => [...prevChatList, ...chatList]);
-    }, [chatList]);
+      if (uploading && Array.isArray(data) && data.length === 0) {
+        clearChatList();
+      }
+    }, [data, uploading, clearChatList]);
     if (isLoading) {
       // Render skeleton loading UI while data is being fetched
       return (
@@ -79,7 +81,7 @@ const fetcher = async() => {
               </div>
             </React.Fragment>
           ))}
-          {newChatList.map((ele, index) => (
+          {chatList.map((ele, index) => (
             <React.Fragment key={`chat-${index}`}>
               {ele.type === 'user' ? (
                 <div className='flex gap-5' id='user-message'>

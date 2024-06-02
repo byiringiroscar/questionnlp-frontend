@@ -1,10 +1,11 @@
 "use client"
-import React, {useState, useRef} from 'react'
+import React, { useState, useRef, useCallback } from 'react';
 import { LuSendHorizonal } from "react-icons/lu";
 import ChatList from './ChatList';
 import { LineWave } from 'react-loader-spinner'
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css'
+import { useUpload } from '@/context/UploadContext';
 
 interface ChatMessage {
   type: 'user' | 'bot';
@@ -26,6 +27,7 @@ const askQuestion = async (question: string) => {
 
 
 const MainContent = () => {
+  const { uploading } = useUpload();
   const [ loading, setLoading ] = useState(false)
   const [chatList, setChatList] = useState<ChatMessage[]>([]);
   const [question, setQuestion] = useState('');
@@ -59,10 +61,14 @@ const MainContent = () => {
     }
   }
 
+  const clearChatList = useCallback(() => {
+    setChatList([]);
+  }, [])
+
 
   return (
     <section className='padding-container w-screen h-screen pt-12 flex flex-col overflow-hidden'>
-        <ChatList chatList={chatList} loading={loading } />
+        <ChatList chatList={chatList} loading={loading} clearChatList={clearChatList} uploading={uploading} />
         <div id='form' className='h-[15%] flex items-center'>
             <form
             onSubmit={handleSubmit}

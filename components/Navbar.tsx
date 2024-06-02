@@ -10,7 +10,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ThreeDots } from 'react-loader-spinner'
 import { LineWave } from 'react-loader-spinner'
 import { mutate } from 'swr';
+import { useUpload } from '@/context/UploadContext';
 
+// Props for Navbar
+interface NavbarProps {
+  setUploading: (uploading: boolean) => void;
+}
 
 const uploadPDF = async (formData: FormData) => {
   const res = await fetch(`http://127.0.0.1:8000/question/file_upload`, {
@@ -23,7 +28,7 @@ const uploadPDF = async (formData: FormData) => {
 }
 
 const Navbar = () => {
-
+  const { setUploading } = useUpload();
   const [nameFile, setnameFile] = useState({is_name: false, file_name: ''});
   const [ loading, setLoading ] = useState(false)
 
@@ -59,6 +64,7 @@ const Navbar = () => {
             });
             // Trigger data re-fetch
             mutate('home');
+            setUploading(true); // Set uploading state to true
           }
           else{
             setLoading(false)
