@@ -43,7 +43,6 @@ const Navbar = () => {
         const data = await res.json();
         setIsLoading(false);
         if(data.warning === 'File not found'){
-          console.log('not found')
           setnameFile({ is_name: false, file_name: '' });
         }
         setnameFile({ is_name: true, file_name: data.file_name });
