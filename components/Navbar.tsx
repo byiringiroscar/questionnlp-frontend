@@ -42,6 +42,10 @@ const Navbar = () => {
         const res = await fetch('http://127.0.0.1:8000/question/latest_fileupload');
         const data = await res.json();
         setIsLoading(false);
+        if(data.warning === 'File not found'){
+          console.log('not found')
+          setnameFile({ is_name: false, file_name: '' });
+        }
         setnameFile({ is_name: true, file_name: data.file_name });
       } catch (error) {
         setIsLoading(false);
@@ -121,7 +125,7 @@ const Navbar = () => {
       </Link>
 
       <div className='flex gap-2 items-center'>
-        {isLoading ? ( // Use isLoading to show loading indicator while fetching data
+        {isLoading ? (
           <LineWave
             visible={true}
             height='80'
@@ -136,10 +140,14 @@ const Navbar = () => {
           />
         ) : nameFile.is_name ? (
           <div className='flex gap-1 items-center'>
-            <div className='flex items-center justify-center px-[4px] py-[5px] border border-solid border-[#0FA958] rounded-lg '>
-              <CiFileOn className='text-sm font-medium leading-[16.47px] text-left text-[#0FA958]' />
-            </div>
-            <span className='text-sm font-medium leading-[16.47px] text-left text-[#0FA958]'>{nameFile.file_name}</span>
+            {nameFile.file_name && ( // Conditionally render if file name is present
+              <div className='flex items-center justify-center px-[4px] py-[5px] border border-solid border-[#0FA958] rounded-lg '>
+                <CiFileOn className='text-sm font-medium leading-[16.47px] text-left text-[#0FA958]' />
+              </div>
+            )}
+            {nameFile.file_name && ( // Conditionally render if file name is present
+              <span className='text-sm font-medium leading-[16.47px] text-left text-[#0FA958]'>{nameFile.file_name}</span>
+            )}
           </div>
         ) : (
           ''
