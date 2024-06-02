@@ -1,5 +1,5 @@
 'use client';
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import logo from '../public/logo.png'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -30,9 +30,29 @@ const uploadPDF = async (formData: FormData) => {
 const Navbar = () => {
   const { setUploading } = useUpload();
   const [nameFile, setnameFile] = useState({is_name: false, file_name: ''});
-  const [ loading, setLoading ] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true)
+
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch('http://127.0.0.1:8000/question/latest_fileupload');
+        const data = await res.json();
+        setIsLoading(false);
+        setnameFile({ is_name: true, file_name: data.file_name });
+      } catch (error) {
+        setIsLoading(false);
+        console.error('Error fetching latest file:', error);
+      } finally {
+        setIsLoading(false); // Set loading to false once fetching is done (whether successful or not)
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();
@@ -96,56 +116,62 @@ const Navbar = () => {
 
   return (
     <nav className='flex justify-between padding-container items-center py-6 xl:px-28 shadow-[rgba(0,0,0,0.24)_0px_3px_8px]'>
-        <Link href='/'>
-            <Image src={logo} alt='logo' width={120} height={120} />
-        </Link>
+      <Link href='/'>
+        <Image src={logo} alt='logo' width={120} height={120} />
+      </Link>
 
-        <div className='flex gap-2 items-center'>
-            {nameFile.is_name ? 
-            (<div className='flex gap-1 items-center'>
-                <div className='flex items-center justify-center px-[4px] py-[5px] border border-solid border-[#0FA958] rounded-lg '>
-                <CiFileOn className='text-sm font-medium leading-[16.47px] text-left text-[#0FA958]' />
-                </div>
-                <span className='text-sm font-medium leading-[16.47px] text-left text-[#0FA958]'>{nameFile.file_name}</span>
-            </div>)
-            : 
-            ('')}
+      <div className='flex gap-2 items-center'>
+        {isLoading ? ( // Use isLoading to show loading indicator while fetching data
+          <LineWave
+            visible={true}
+            height='80'
+            width='90'
+            color='#4fa94d'
+            ariaLabel='line-wave-loading'
+            wrapperStyle={{}}
+            wrapperClass=''
+            firstLineColor=''
+            middleLineColor=''
+            lastLineColor=''
+          />
+        ) : nameFile.is_name ? (
+          <div className='flex gap-1 items-center'>
+            <div className='flex items-center justify-center px-[4px] py-[5px] border border-solid border-[#0FA958] rounded-lg '>
+              <CiFileOn className='text-sm font-medium leading-[16.47px] text-left text-[#0FA958]' />
+            </div>
+            <span className='text-sm font-medium leading-[16.47px] text-left text-[#0FA958]'>{nameFile.file_name}</span>
+          </div>
+        ) : (
+          ''
+        )}
 
-            <button 
-            className='px-3 lg:px-10 py-2 gap-1 flex justify-center items-center border border-solid border-[black] rounded-lg'
-            onClick={handleButtonClick}
-            disabled={loading}
-            >
-                  {loading ? (<LineWave
-                      visible={true}
-                      height="30"
-                      width="60"
-                      color="#4fa94d"
-                      ariaLabel="line-wave-loading"
-                      wrapperStyle={{}}
-                      wrapperClass=""
-                      firstLineColor=""
-                      middleLineColor=""
-                      lastLineColor=""
-                      />): 
-                      (
-                  <>
-                  <CiCirclePlus className='text-black font-bold h-5 w-5' />
-                  <span className='hidden lg:block text-sm font-semibold'>Upload File</span>
-                  </>
-                     )
-                    }
-                
-            </button>
-            <input 
-             type="file"  
-             ref={fileInputRef} 
-             className="hidden"
-             onChange={handleFileChange}
-             multiple={false}
-             accept=".pdf"
-             />
-        </div>
+        <button
+          className='px-3 lg:px-10 py-2 gap-1 flex justify-center items-center border border-solid border-[black] rounded-lg'
+          onClick={handleButtonClick}
+          disabled={loading}
+        >
+          {loading ? (
+            <LineWave
+              visible={true}
+              height='30'
+              width='60'
+              color='#4fa94d'
+              ariaLabel='line-wave-loading'
+              wrapperStyle={{}}
+              wrapperClass=''
+              firstLineColor=''
+              middleLineColor=''
+              lastLineColor=''
+            />
+          ) : (
+            <>
+              <CiCirclePlus className='text-black font-bold h-5 w-5' />
+              <span className='hidden lg:block text-sm font-semibold'>Upload File</span>
+            </>
+          )}
+        </button>
+        <input type='file' ref={fileInputRef} className='hidden' onChange={handleFileChange} multiple={false} accept='.pdf' />
+      </div>
     </nav>
   )
 }
