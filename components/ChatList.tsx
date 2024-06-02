@@ -30,6 +30,7 @@ const fetcher = async() => {
 
 
   const ChatList: React.FC<ChatListProps> = ({ chatList, loading }) => {
+    const [newChatList, setNewChatList] = useState<ChatMessage[]>([]);
     const { data, error, mutate, isLoading }  = useSWR('home', fetcher)
     const chatListRef = useRef<HTMLDivElement>(null);
     useEffect(() => {
@@ -37,6 +38,10 @@ const fetcher = async() => {
       if (chatListRef.current) {
         chatListRef.current.scrollTop = chatListRef.current.scrollHeight;
       }
+    }, [chatList]);
+    useEffect(() => {
+      // Append new chat messages to newChatList
+      setNewChatList(prevChatList => [...prevChatList, ...chatList]);
     }, [chatList]);
     if (isLoading) {
       // Render skeleton loading UI while data is being fetched
@@ -74,7 +79,7 @@ const fetcher = async() => {
               </div>
             </React.Fragment>
           ))}
-          {chatList.map((ele, index) => (
+          {newChatList.map((ele, index) => (
             <React.Fragment key={`chat-${index}`}>
               {ele.type === 'user' ? (
                 <div className='flex gap-5' id='user-message'>
